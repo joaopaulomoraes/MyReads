@@ -193,25 +193,20 @@ body, .app {
 .books-transition-enter {
   opacity: 0.01;
 }
-
 .books-transition-enter.books-transition-enter-active {
   opacity: 1;
   transition: opacity 500ms ease-in;
 }
-
 .books-transition-leave {
   opacity: 1;
 }
-
 .books-transition-leave.books-transition-leave-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
-
 .books-transition-appear {
   opacity: 0.01;
 }
-
 .books-transition-appear.books-transition-appear-active {
   opacity: 1;
   transition: opacity .5s ease-in;
