@@ -1,14 +1,29 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+import MyBooks from './components/MyBooks'
+import MainHeader from './components/main/MainHeader'
+import BooksSearch from './components/books/BooksSearch'
+import AddButton from './components/main/AddButton'
+import './App.css'
 
-class App extends Component {
+class MyReads extends Component {
   render() {
     return (
-      <div className="App">
-        <h1>Welcome to MyReads App</h1>
+      <div className="app" id="app">
+        <Route exact path="/" render={() => (
+          <div className="list-books">
+            <MainHeader />
+            <MyBooks />
+            <AddButton />
+          </div>
+        )}/>
+
+        <Route path="/search" render={() => (
+          <BooksSearch />
+        )}/>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default MyReads
