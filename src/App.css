@@ -8,20 +8,24 @@ body {
 }
 body, .app {
   font-family: 'Roboto', sans-serif;
-  background: white;
+  background: #fafafa;
 }
 
 /* main page */
 
+.list-books-title,
+.search-books-bar {
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12), 0 0 12px rgba(0,0,0,0.12);
+}
+
 .list-books-title {
   padding: 10px 0;
-  background: #2e7c31;
+  background: #ffeb3b;
   text-align: center;
 }
 .list-books-title h1 {
-  font-weight: 400;
+  font-weight: 500;
   margin: 0;
-  color: white;
 }
 
 .list-books-content {
@@ -40,6 +44,8 @@ body, .app {
 }
 
 .bookshelf-title {
+  color: #555;
+  font-weight: 400;
   border-bottom: 1px solid #dedede;
 }
 .bookshelf-books {
@@ -56,7 +62,7 @@ body, .app {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #2e7d32;
+  background: #64ffda;
   background-image: url('./icons/add.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -74,15 +80,14 @@ body, .app {
   left: 0;
   z-index: 5;
   display: flex;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 0 6px rgba(0,0,0,0.23);
 }
 .search-books-input-wrapper {
   flex: 1;
-  background: #e9e;
+  background: #fff;
 }
 .search-books-bar input {
   width: 100%;
-  padding: 15px 10px;
+  padding: 20px 10px;
   font-size: 1.25em;
   border: none;
   outline: none;
@@ -93,7 +98,7 @@ body, .app {
   top: 20px;
   left: 15px;
   width: 50px;
-  height: 53px;
+  height: 68px;
   background: white;
   background-image: url('./icons/arrow-back.svg');
   background-position: center;
@@ -130,7 +135,8 @@ body, .app {
   font-size: 0.8em;
 }
 .book-title {
-  margin-top: 10px;
+  font-weight: 500;
+  margin-top: 15px;
 }
 .book-authors {
   color: #999;
@@ -150,7 +156,7 @@ body, .app {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #60ac5d;
+  background: #ffeb3b;
   background-image: url('./icons/arrow-drop-down.svg');
   background-repeat: no-repeat;
   background-position: center;
@@ -167,9 +173,15 @@ body, .app {
 /* book cover */
 
 .book-cover {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   background: #eee;
 }
+
+.book-cover,
+.book-shelf-changer,
+.open-search a {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.12), 0 3px 6px rgba(0,0,0,0.24);
+}
+
 .book-cover-title {
   padding: 20px 10px 0;
   text-align: center;
