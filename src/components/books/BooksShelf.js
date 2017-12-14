@@ -1,12 +1,38 @@
 import React, { Component } from 'react'
+import BooksList from './BooksList'
+import PropTypes from 'prop-types'
+import * as BooksAPI from '../../utils/BooksAPI'
 
 class BooksShelf extends Component {
+  static propTypes = {
+    shelfCategory: PropTypes.array.isRequired
+  }
+
+  state = {
+    books: []
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books })
+    })
+  }
+
   render() {
+    const { shelfCategory } = this.props
+    let { books } = this.state
+
     return (
       <div className="bookshelf">
-        <div>
-          <h2 className="bookshelf-title">Shelf title</h2>
-        </div>
+        {shelfCategory.map((shelf) => (
+          <div key={shelf.id}>
+            <h2 className="bookshelf-title">{shelf.title}</h2>
+            <BooksList
+              shelfCategory={shelf.value}
+              shelfBooks={books}
+            />
+          </div>
+        ))}
       </div>
     )
   }
