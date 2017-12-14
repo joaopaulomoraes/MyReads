@@ -12,6 +12,10 @@ class BooksShelf extends Component {
     books: []
   }
 
+  /**
+   * @description Calls all API books and assigns state
+   * @memberof BooksShelf
+   */
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
