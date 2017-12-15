@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { CSSTransitionGroup } from 'react-transition-group'
 import BooksShelfCategory from './BooksShelfCategory'
 import PropTypes from 'prop-types'
 import noBookCover from '../../icons/noBookCover.jpg'
@@ -26,6 +27,11 @@ class BooksList extends Component {
       <div className="bookshelf-books" id="books-list">
         <ol className="books-grid">
         {shelfBooks.length > 0 && shelfBooks.map((book) => book.shelf === shelfCategory && (
+          <CSSTransitionGroup
+            transitionName="books-transition"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+          >
           <li key={book.id}>
             <div className="book">
               <div className="book-top">
@@ -46,6 +52,7 @@ class BooksList extends Component {
               <div className="book-authors">{book.authors}</div>
             </div>
           </li>
+          </CSSTransitionGroup>
         ))}
         </ol>
       </div>
