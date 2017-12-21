@@ -4,9 +4,14 @@ import BooksList from './BooksList'
 import * as BooksAPI from '../../utils/BooksAPI'
 import { DebounceInput } from 'react-debounce-input'
 import escapeStringExp from 'escape-string-regexp'
+import PropTypes from 'prop-types'
 import sortBy from 'sort-by'
 
 class BooksSearch extends Component {
+  static propTypes = {
+    handleBookUpdate: PropTypes.func.isRequired
+  }
+
   state = {
     books: [],
     query: ''
@@ -31,23 +36,8 @@ class BooksSearch extends Component {
     return verifiedSearch
   }
 
-  /**
-   * @description Updates the bookshelf
-   * @param {object} book
-   * @param {string} shelf
-   * @returns {books}
-   * @memberof BooksShelf
-   */
-  handleBookUpdate = (book, shelf) => {
-    book.shelf = shelf
-    BooksAPI.update(book, shelf).then(() => {
-      this.setState((state) => ({
-        books: this.state.books.filter((b) => b.id !== book.id).concat([book])
-      }))
-    })
-  }
-
   render() {
+    const { handleBookUpdate } = this.props
     let { books, query } = this.state
 
     if (books) {
@@ -75,7 +65,7 @@ class BooksSearch extends Component {
         <div className="search-books-results">
           <BooksList
             shelfBooks={books}
-            handleBookUpdate={this.handleBookUpdate}
+            handleBookUpdate={handleBookUpdate}
           />
         </div>
       </div>

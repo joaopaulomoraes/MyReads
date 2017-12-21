@@ -4,9 +4,31 @@ import MyBooks from './components/MyBooks'
 import MainHeader from './components/main/MainHeader'
 import BooksSearch from './components/books/BooksSearch'
 import AddButton from './components/main/AddButton'
+import * as BooksAPI from './utils/BooksAPI'
 import './App.css'
 
 class MyReads extends Component {
+  state = {
+    books: []
+  }
+
+  /**
+   * @description Updates the bookshelf
+   * @param {object} book
+   * @param {string} shelf
+   * @returns {books}
+   * @memberof BooksShelf
+   */
+  handleBookUpdate = (book, shelf) => {
+    book.shelf = shelf
+    BooksAPI.update(book, shelf).then(() => {
+      this.setState((state) => ({
+        books: this.state.books.filter((b) => b.id !== book.id).concat([book]),
+        loading: false
+      }))
+    })
+  }
+
   render() {
     return (
       <div className="app" id="app">
@@ -16,7 +38,7 @@ class MyReads extends Component {
           render={() => (
             <div className="list-books">
               <MainHeader />
-              <MyBooks />
+              <MyBooks handleBookUpdate={this.handleBookUpdate} />
               <AddButton />
             </div>
           )}
@@ -25,7 +47,7 @@ class MyReads extends Component {
         <Route
           path="/search"
           render={() => (
-            <BooksSearch />
+            <BooksSearch handleBookUpdate={this.handleBookUpdate} />
           )}
         />
       </div>
