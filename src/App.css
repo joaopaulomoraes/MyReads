@@ -140,6 +140,7 @@ body, .app {
 }
 .book-authors {
   color: #999;
+  display: table;
 }
 
 .book-top {
