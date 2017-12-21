@@ -22,6 +22,22 @@ class BooksShelf extends Component {
     })
   }
 
+  /**
+   * @description Updates the bookshelf
+   * @param {object} book
+   * @param {string} shelf
+   * @returns {books}
+   * @memberof BooksShelf
+   */
+  handleBookUpdate = (book, shelf) => {
+    book.shelf = shelf
+    BooksAPI.update(book, shelf).then(() => {
+      this.setState((state) => ({
+        books: this.state.books.filter((b) => b.id !== book.id).concat([book])
+      }))
+    })
+  }
+
   render() {
     const { shelfCategory } = this.props
     let { books } = this.state
@@ -34,6 +50,7 @@ class BooksShelf extends Component {
             <BooksList
               shelfCategory={shelf.value}
               shelfBooks={books}
+              handleBookUpdate={this.handleBookUpdate}
             />
           </div>
         ))}
