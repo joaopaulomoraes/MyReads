@@ -3,7 +3,6 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import BooksShelfCategory from './BooksShelfCategory'
 import PropTypes from 'prop-types'
 import noBookCover from '../../icons/noBookCover.jpg'
-import ReactStars from 'react-stars'
 
 class BooksList extends Component {
   static propTypes = {
@@ -56,18 +55,8 @@ class BooksList extends Component {
                   handleBookUpdate={handleBookUpdate}
                 />
               </div>
-              <div style={{ marginTop: 15 }}>
-                <ReactStars
-                  count={5}
-                  color1={'#999'}
-                  value={book.ratingsCount}
-                  size={22}
-                  color2={'#ffeb3b'}
-                  edit={false}
-                />
-              </div>
               <div className="book-title">{book.title}</div>
-              <div className="book-authors">{book.authors}<br /></div>
+              <div className="book-authors">{book.authors}</div>
             </div>
           </li>
           </ReactCSSTransitionGroup>
