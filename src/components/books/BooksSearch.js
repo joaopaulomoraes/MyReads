@@ -31,6 +31,22 @@ class BooksSearch extends Component {
     return verifiedSearch
   }
 
+  /**
+   * @description Updates the bookshelf
+   * @param {object} book
+   * @param {string} shelf
+   * @returns {books}
+   * @memberof BooksShelf
+   */
+  handleBookUpdate = (book, shelf) => {
+    book.shelf = shelf
+    BooksAPI.update(book, shelf).then(() => {
+      this.setState((state) => ({
+        books: this.state.books.filter((b) => b.id !== book.id).concat([book])
+      }))
+    })
+  }
+
   render() {
     let { books, query } = this.state
 
@@ -59,6 +75,7 @@ class BooksSearch extends Component {
         <div className="search-books-results">
           <BooksList
             shelfBooks={books}
+            handleBookUpdate={this.handleBookUpdate}
           />
         </div>
       </div>
