@@ -10,17 +10,24 @@ class MyReads extends Component {
   render() {
     return (
       <div className="app" id="app">
-        <Route exact path="/" render={() => (
-          <div className="list-books">
-            <MainHeader />
-            <MyBooks />
-            <AddButton />
-          </div>
-        )}/>
+        <Route
+          exact
+          path="/"
+          render={() => (
+            <div className="list-books">
+              <MainHeader />
+              <MyBooks />
+              <AddButton />
+            </div>
+          )}
+        />
 
-        <Route path="/search" render={() => (
-          <BooksSearch />
-        )}/>
+        <Route
+          path="/search"
+          render={() => (
+            <BooksSearch />
+          )}
+        />
       </div>
     )
   }
