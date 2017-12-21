@@ -7,7 +7,8 @@ import noBookCover from '../../icons/noBookCover.jpg'
 class BooksList extends Component {
   static propTypes = {
     shelfCategory: PropTypes.string,
-    shelfBooks: PropTypes.array.isRequired
+    shelfBooks: PropTypes.array.isRequired,
+    handleBookUpdate: PropTypes.func.isRequired
   }
 
   /**
@@ -21,7 +22,7 @@ class BooksList extends Component {
   }
 
   render() {
-    let { shelfCategory, shelfBooks } = this.props
+    const { shelfCategory, shelfBooks, handleBookUpdate } = this.props
 
     return (
       <div className="bookshelf-books" id="books-list">
@@ -49,7 +50,10 @@ class BooksList extends Component {
                     backgroundPosition: 'center'
                   }}>
                 </div>
-                <BooksShelfCategory />
+                <BooksShelfCategory
+                  book={book}
+                  handleBookUpdate={handleBookUpdate}
+                />
               </div>
               <div className="book-title">{book.title}</div>
               <div className="book-authors">{book.authors}</div>
