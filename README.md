@@ -8,7 +8,7 @@ A Book Lending App with React
 
 Cloning the project.
 ```
-https://github.com/joaopaulomoraes/MyReads.git myreads-app
+git clone https://github.com/joaopaulomoraes/MyReads.git myreads-app
 ```
 
 Access the project directory.
