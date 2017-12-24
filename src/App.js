@@ -13,6 +13,16 @@ class MyReads extends Component {
   }
 
   /**
+   * @description Calls all API books and assigns state
+   * @memberof BooksShelf
+   */
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      this.setState({ books })
+    })
+  }
+
+  /**
    * @description Updates the bookshelf
    * @param {object} book
    * @param {string} shelf
@@ -23,13 +33,14 @@ class MyReads extends Component {
     book.shelf = shelf
     BooksAPI.update(book, shelf).then(() => {
       this.setState((state) => ({
-        books: this.state.books.filter((b) => b.id !== book.id).concat([book]),
-        loading: false
+        books: this.state.books.filter((b) => b.id !== book.id).concat([book])
       }))
     })
   }
 
   render() {
+    const { books } = this.state
+
     return (
       <div className="app" id="app">
         <Route
@@ -38,7 +49,10 @@ class MyReads extends Component {
           render={() => (
             <div className="list-books">
               <MainHeader />
-              <MyBooks handleBookUpdate={this.handleBookUpdate} />
+              <MyBooks
+                books={books}
+                handleBookUpdate={this.handleBookUpdate}
+              />
               <AddButton />
             </div>
           )}
@@ -47,7 +61,10 @@ class MyReads extends Component {
         <Route
           path="/search"
           render={() => (
-            <BooksSearch handleBookUpdate={this.handleBookUpdate} />
+            <BooksSearch
+              books={books}
+              handleBookUpdate={this.handleBookUpdate}
+            />
           )}
         />
       </div>
