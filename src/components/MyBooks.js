@@ -5,15 +5,17 @@ import PropTypes from 'prop-types'
 
 class MyBooks extends Component {
   static propTypes = {
+    books: PropTypes.array.isRequired,
     handleBookUpdate: PropTypes.func.isRequired
   }
 
   render() {
-    const { handleBookUpdate } = this.props
+    const { books, handleBookUpdate } = this.props
 
     return (
       <div className="list-books-content" id="my-books">
         <BooksShelf
+          books={books}
           shelfCategory={shelfCategory}
           handleBookUpdate={handleBookUpdate}
         />
