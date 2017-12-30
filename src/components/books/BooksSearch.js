@@ -9,11 +9,12 @@ import sortBy from 'sort-by'
 
 class BooksSearch extends Component {
   static propTypes = {
+    books: PropTypes.array.isRequired,
     handleBookUpdate: PropTypes.func.isRequired
   }
 
   state = {
-    books: [],
+    booksSearch: [],
     query: ''
   }
 
@@ -27,25 +28,37 @@ class BooksSearch extends Component {
   seachBooks = (word) => {
     let verifiedSearch = (word.length)
       ? BooksAPI.search(word, 20)
-        .then((books) => {
-          books.length > 0 ? this.setState({ books }) : books = []
+        .then((booksSearch) => {
+          const { books } = this.props
+          if (booksSearch.length > 0) {
+            // Go through all the books and assign a shelf based on your existence
+            for (const s of booksSearch) {
+              s.shelf = 'none'
+              for (const b of books) {
+                if (s.id === b.id) {
+                  s.shelf = b.shelf
+                }
+              }
+            }
+            this.setState({ booksSearch })
+          }
         })
       : null
-    this.setState({query: word, books: []})
+    this.setState({query: word, booksSearch: []})
 
     return verifiedSearch
   }
 
   render() {
     const { handleBookUpdate } = this.props
-    let { books, query } = this.state
+    let { booksSearch, query } = this.state
 
-    if (books) {
+    if (booksSearch) {
       const match = new RegExp(escapeStringExp(query), 'i')
-      books.filter((book) => match.test(book.title || book.author))
+      booksSearch.filter((book) => match.test(book.title || book.author))
     }
 
-    books.sort(sortBy('title', 'author'))
+    booksSearch.sort(sortBy('title', 'author'))
 
     return (
       <div className="search-books" id="books-search">
@@ -64,7 +77,7 @@ class BooksSearch extends Component {
         </div>
         <div className="search-books-results">
           <BooksList
-            shelfBooks={books}
+            shelfBooks={booksSearch}
             handleBookUpdate={handleBookUpdate}
           />
         </div>
